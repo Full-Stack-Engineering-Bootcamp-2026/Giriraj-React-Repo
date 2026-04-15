@@ -1,75 +1,171 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { userAPI } from './userAPI'
-import { useDispatch } from 'react-redux';
 
-
-// First, create the thunk
-export interface User{
-    id:number,
-    name:string,
-    email:string,
-    phone:number
+// ======================
+// USER TYPE
+// ======================
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone: number;
 }
 
-
+// ======================
+// STATE TYPE
+// ======================
 interface UsersState {
-  entities: User[]
-  loading: 'idle' | 'pending' | 'succeeded' | 'rejected'
+  entities: User[];
+  loading: 'idle' | 'pending' | 'succeeded' | 'rejected';
+  error: string | null;
 }
 
-const initialState = {
+// ======================
+// INITIAL STATE
+// ======================
+const initialState: UsersState = {
   entities: [],
   loading: 'idle',
-  error:null as string|null,
+  error: null,
 };
 
+// ======================
+// FETCH USER BY ID
+// ======================
 export const fetchUserById = createAsyncThunk(
   'users/fetchById',
   async (userId: number, thunkAPI) => {
-    try{
-    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-    if(!response.ok){
-      throw new Error('API failed')
-    }
-    return await response.json();
-    }
-    catch(err)
-    {
-      return thunkAPI.rejectWithValue(err.response.data)
-    }
-  },
-)
+    try {
+      const response = await fetch(`http://localhost:3001/users/${userId}`);
 
-// Then, handle actions in your reducers:
+      if (!response.ok) {
+        throw new Error('API failed');
+      }
+
+      return await response.json();
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+// ======================
+// CREATE USER
+// ======================
+export const createUser = createAsyncThunk(
+  'users/create',
+  async (
+    { name, email, phone }: { name: string; email: string; phone: number },
+    thunkAPI
+  ) => {
+    try {
+      const response = await fetch(`http://localhost:3001/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, phone }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Unable to create user');
+      }
+
+      return await response.json();
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+// ======================
+// DELETE USER
+// ======================
+export const deleteUser = createAsyncThunk(
+  'users/delete',
+  async (userId: number, thunkAPI) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Unable to delete user');
+      }
+
+      // return deleted user id
+      return userId;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
+// ======================
+// SLICE
+// ======================
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {
-    // standard reducer logic, with auto-generated action types per reducer
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
+    
+    // ----------------------
+    // FETCH USER
+    // ----------------------
     builder.addCase(fetchUserById.pending, (state) => {
-      // Add user to the state array
-      state.loading="pending";
-     
+      state.loading = 'pending';
     });
+
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
-      // Add user to the state array
-      state.loading="succeeded";
-      state.entities.push(action.payload)
+      state.loading = 'succeeded';
+      state.entities.push(action.payload);
     });
-    builder.addCase(fetchUserById.rejected, (state,action) => {
-      // Add user to the state array
-      state.loading="rejected";
-      // state.error=action.payload as string;  
-      state.error="very funny error";
+
+    builder.addCase(fetchUserById.rejected, (state, action) => {
+      state.loading = 'rejected';
+      state.error = action.payload as string;
+    });
+
+    // ----------------------
+    // CREATE USER
+    // ----------------------
+    builder.addCase(createUser.pending, (state) => {
+      state.loading = 'pending';
+    });
+
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.loading = 'succeeded';
+      state.entities.push(action.payload);
+    });
+
+    builder.addCase(createUser.rejected, (state, action) => {
+      state.loading = 'rejected';
+      state.error = action.payload as string;
+    });
+
+    // ----------------------
+    // DELETE USER
+    // ----------------------
+    builder.addCase(deleteUser.pending, (state) => {
+      state.loading = 'pending';
+    });
+
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      state.loading = 'succeeded';
+
+      state.entities = state.entities.filter(
+        (user) => user.id !== action.payload
+      );
+    });
+
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.loading = 'rejected';
+      state.error = action.payload as string;
     });
   },
-})
-// const Dispatcher=()=>{
-// const dispatch=useDispatch();
-// // Later, dispatch the thunk as needed in the app
-// dispatch(fetchUserById(1));
-// }
+});
+
 export default usersSlice.reducer;

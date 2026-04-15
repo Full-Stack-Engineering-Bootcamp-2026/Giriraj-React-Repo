@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react'
 import {useDispatch,useSelector} from 'react-redux';
-import {fetchUserById} from "./userSlice";
+import {fetchUserById,createUser,deleteUser} from "./userSlice";
 import type {RootState,AppDispatch} from "./store";
 import './App.css'
 
@@ -12,11 +12,25 @@ function App() {
   const error=useSelector((state:RootState)=>state.users.error);
  // const pending=useSelector((state:RootState)=>state.users.pending);
  // const loading=useSelector((state:RootState)=>state.users.loading);
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    dispatch(fetchUserById(1))
+  //   dispatch(fetchUserById(1))
     
-  },[dispatch]);
+  // },[dispatch]);
+
+  //  useEffect(()=>{
+
+  //   dispatch(createUser({
+  //     name:"a",
+  //     email:"a@gmail.com",
+  //     phone:123}))
+    
+  //   },[dispatch]);
+
+    // useEffect(()=>{
+
+    // dispatch(deleteUser(3))},[dispatch]);
+
   if(error)
     { return(<p>Error:{error}</p>)}
    if(loading==='pending')
