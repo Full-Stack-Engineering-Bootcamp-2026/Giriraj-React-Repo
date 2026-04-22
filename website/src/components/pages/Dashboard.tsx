@@ -54,7 +54,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
+ChartJS.register(ArcElement, Tooltip, Legend);
 const Dashboard = () => {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
@@ -65,7 +68,7 @@ const Dashboard = () => {
     const fetchCharacters = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`https://rickandmortyapi.com/api/character/`);
+        const res = await fetch(`https://rickandmortyapi.com/api/character`);
         const data = await res.json();
         setCharacters(data.results);
         setTotalPages(data.info.pages);
@@ -78,10 +81,35 @@ const Dashboard = () => {
     fetchCharacters();
   }, [page]);
 
+  const data = {
+  labels: ['Red', 'Blue', 'Yellow'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+const options = {
+  responsive: true,
+  maintainAspectRatio: false, // Allows chart to fill container
+};
   return (
     <div className="p-4 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+        <h3 className="text-2xl font-bold mb-4">Dashboard</h3>
         {/* Banner Section */}
         <div style={{
           display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px',
@@ -103,9 +131,9 @@ const Dashboard = () => {
           <TableHeader>
             <TableRow>
               <TableHead>CLIENT</TableHead>
-              <TableHead>AMOUNT</TableHead>
+              <TableHead>NAME</TableHead>
               <TableHead>STATUS</TableHead>
-              <TableHead>DATE</TableHead>
+              <TableHead>SPECIES</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -147,7 +175,19 @@ const Dashboard = () => {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-    </div>
+      <h3 className="text-2xl font-bold mb-4">Dashboard</h3>
+      <div className="flex flex-row">
+      <div style={{ width: '400px', height: '400px' }}>
+       <span>Revenue</span> 
+      <Pie data={data} options={options} />
+      </div>
+      <div style={{ width: '400px', height: '400px' }}>
+        <span>Revenue</span> 
+      <Doughnut data={data} options={options} />
+      </div>
+      </div>
+      </div>
+   
   );
 };
 
