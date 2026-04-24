@@ -1,40 +1,4 @@
-// import { CiStar } from "react-icons/ci";
-// import StatCard from "../CardComponent/StatCard"
-// const Dashboard = () => {
 
-//   return (
-//    <div>   
-//     <div>
-//        <h1>Dashboard</h1>
-//        <div style={{
-//     display: 'flex',
-//     flexDirection: 'row',
-//     alignItems: 'center', // Aligns items vertically
-//     gap: '10px',          // Space between icon and text
-//     padding: '10px',
-//     border: '1px solid #ccc',
-//     borderRadius: '5px',
-//     width: 'full',
-//     backgroundColor:'purple'
-//   }}>
-//       <CiStar /> {/* Start Icon */}
-//       <span>Star this project on GitHub</span> {/* Text */}
-//       <span style={{marginLeft:"auto"}}>View More </span>
-//     </div>
-
-//     {/* <div className="dashboard-container">
-//       {stats.map((stat, index) => (
-//         <StatCard key={index} {...stat} />
-//       ))}
-//     </div> */}
-//     <div>
-//      <StatCard/>
-//     </div>
-//    </div>
-//          </div>);
-// };
-
-// export default Dashboard;
 import React, { useState, useEffect } from "react";
 import { CiStar } from "react-icons/ci";
 import StatCard from "../CardComponent/StatCard";
@@ -54,9 +18,31 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
 import { Pie } from 'react-chartjs-2';
-import { Doughnut } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+import { Doughnut,Line } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 const Dashboard = () => {
   const [characters, setCharacters] = useState([]);
@@ -82,30 +68,90 @@ const Dashboard = () => {
   }, [page]);
 
   const data = {
-  labels: ['Red', 'Blue', 'Yellow'],
+  labels: ['Shirts', 'Shoes', 'Bags'],
   datasets: [
     {
-      label: '# of Votes',
-      data: [12, 19, 3],
+      data: [33, 33, 34], 
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
+        '#2563eb', // Blue for Shirts
+        '#0d9488', // Teal for Shoes
+        '#9333ea', // Purple for Bags
       ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-      ],
-      borderWidth: 1,
+      hoverOffset: 4,
+      borderWidth: 2,
+      borderColor: '#111827', 
     },
   ],
 };
 
 const options = {
-  responsive: true,
-  maintainAspectRatio: false, // Allows chart to fill container
+  cutout: '80%', 
+  plugins: {
+    legend: {
+      position: 'bottom', 
+      labels: {
+        usePointStyle: true, 
+        pointStyle: 'circle',
+        padding: 20,
+        color: '#9ca3af', 
+      },
+    },
+  },
 };
+
+const data1 = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [
+    {
+      label: 'Organic',
+      data: [42, 48, 40, 52, 65, 72, 70], 
+      borderColor: '#0d9488',
+      backgroundColor: '#0d9488',
+      tension: 0.4, 
+      pointRadius: 4,
+    },
+    {
+      label: 'Paid',
+      data: [25, 50, 62, 75, 52, 50, 65], 
+      borderColor: '#9333ea',
+      backgroundColor: '#9333ea',
+      tension: 0.4,
+      pointRadius: 4,
+    },
+  ],
+};
+
+const options1 = {
+  responsive: true,
+  maintainAspectRatio:false,
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        usePointStyle: true,
+        pointStyle: 'circle',
+        color: '#9ca3af', 
+      },
+    },
+  },
+  scales: {
+    y: {
+      grid: {
+        color: 'rgba(156, 163, 175, 0.1)', 
+      },
+      ticks: { color: '#9ca3af' },
+      min: 20,
+      max: 80,
+    },
+    x: {
+      grid: { display: false }, 
+      ticks: { color: '#9ca3af' },
+    },
+  },
+};
+
+
+
   return (
     <div className="p-4 space-y-6">
       <div>
@@ -177,16 +223,16 @@ const options = {
       </Pagination>
       <h3 className="text-2xl font-bold mb-4">Dashboard</h3>
       <div className="flex flex-row">
-      <div style={{ width: '400px', height: '400px' }}>
-       <span>Revenue</span> 
-      <Pie data={data} options={options} />
-      </div>
-      <div style={{ width: '400px', height: '400px' }}>
+      <div  className="w-1/2" style={{height: '400px' }}>
         <span>Revenue</span> 
       <Doughnut data={data} options={options} />
       </div>
+      <div className="w-1/2" style={{height: '400px' }}>
+        <span>Trends</span> 
+       <Line data={data1} options={options1} />
       </div>
       </div>
+    </div>
    
   );
 };

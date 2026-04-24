@@ -7,7 +7,12 @@ import Cards from "./components/pages/Cards";
 import Charts from "./components/pages/Charts";
 import Button from "./components/pages/Button";
 import Modals from "./components/pages/Modals";
-import Tables from "./components/pages/Tables";
+import Login from "./components/pages/Login";
+import Tables from "./components/pages/Tables"
+import CreateAccount from "./components/pages/CreateAccount";
+import ForgotPassword from "./components/pages/ForgotPassword";
+import Page404 from "./components/pages/Page404";
+import Blank from "./components/pages/Blank";
 
 
 export const SidebarRoutes = () => {
@@ -22,10 +27,13 @@ export const SidebarRoutes = () => {
       <Route path="/modals" element={<Modals />} />
       <Route path="/tables" element={<Tables />} />
       
-      {/* Nested route for "Pages" option */}
-      {/* <Route path="/pages" element={<PagesLayout />}>
-         <Route path="profile" element={<Profile />} />
-      </Route> */}
+      <Route path="/pages">
+        <Route path="login" element={<Login />} />
+        <Route path="create-account" element={<CreateAccount />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="Page404" element={<Page404/>} />
+        <Route path="blank" element={<Blank/>} />
+      </Route>
       
     </Routes>
   );

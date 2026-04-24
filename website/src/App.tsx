@@ -15,7 +15,7 @@ function App() {
     <div className="flex min-h-screen m-0 p-0">
       {/* Sidebar - 30% */}
       {/* <div className="flex w-[calc(287px)]"> */}
-        <div className="flex w-[calc(287px)]">
+      <div className="flex w-[calc(287px)]">
         <SidebarProvider>
           <AppSidebar />
         </SidebarProvider>
@@ -23,7 +23,7 @@ function App() {
       {/* Right side - 70% */}
       <div className="flex w-[calc(100%-287px)] flex-col">
         {/* <div className="w-full flex "> */}
-        <div className="h-16 w-full p-0">
+        <div className="h-16 w-full p-0 sticky top-0 z-50 bg-background">
           <Header />
         </div>
         {/* Page Content */}

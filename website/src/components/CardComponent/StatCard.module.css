@@ -2,26 +2,26 @@
 
 .outerWrapper {
   display: flex !important;
-  flex-direction: row !important; /* Explicitly forces horizontal */
+  flex-direction: row !important; 
   align-items: stretch;
-  gap: 1.5rem; /* Increased gap to match the screenshot */
+  gap: 1.5rem; 
   width: 100%;
   
-  /* UPDATED: Added space between the GitHub banner and the cards */
+
   margin-top: 1.5rem; 
   margin-bottom: 1.5rem;
 }
 
 .card {
-  /* UPDATED: Darker shade to match the Windmill Dashboard theme in your image */
+
   background-color: #1a1c23; 
   padding: 1.25rem;
   border-radius: 8px;
   display: flex;
   align-items: center;
-  flex: 1; /* Makes all 4 blocks take equal width in that one row */
+  flex: 1; 
   min-width: 0;
-  /* Added subtle shadow like the screenshot */
+
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
@@ -42,7 +42,7 @@
 }
 
 .label {
-  /* UPDATED: Lighter muted color for better readability on dark bg */
+  
   color: #9e9e9e;
   font-size: 0.85rem;
   margin: 0;
@@ -51,7 +51,7 @@
 
 .value {
   color: #ffffff;
-  font-size: 1.3rem; /* Slightly larger font for the values */
+  font-size: 1.3rem; 
   font-weight: 700;
   margin: 2px 0 0 0;
 }

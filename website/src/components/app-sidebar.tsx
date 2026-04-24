@@ -1,23 +1,4 @@
-// import {
-//   Sidebar,
-//   SidebarContent,
-//   SidebarFooter,
-//   SidebarGroup,
-//   SidebarHeader,
-// } from "@/components/ui/sidebar"
 
-// export function AppSidebar() {
-//   return (
-//     <Sidebar>
-//       <SidebarHeader />
-//       <SidebarContent>
-//         <SidebarGroup />
-//         <SidebarGroup />
-//       </SidebarContent>
-//       <SidebarFooter />
-//     </Sidebar>
-//   )
-// }
 import { Link } from 'react-router';
 import {
   Sidebar,
@@ -146,27 +127,27 @@ export function AppSidebar() {
       <SidebarMenuSub> {/* Use SidebarMenuSub for nested items */}
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <Link to="/login">Login</Link>
+            <Link to="/pages/login">Login</Link>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <Link to="/create-account">Create account</Link>
+            <Link to="/pages/create-account">Create account</Link>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <Link to="/forgot-password">Forgot password</Link>
+            <Link to="/pages/forgot-password">Forgot password</Link>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <Link to="/404">404</Link>
+            <Link to="/pages/Page404">404</Link>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
         <SidebarMenuSubItem>
           <SidebarMenuSubButton asChild>
-            <Link to="/blank">Blank</Link>
+            <Link to="/pages/blank">Blank</Link>
           </SidebarMenuSubButton>
         </SidebarMenuSubItem>
       </SidebarMenuSub>
