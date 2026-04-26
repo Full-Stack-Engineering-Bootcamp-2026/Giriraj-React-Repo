@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import {store} from './app/store'
 import {Provider} from 'react-redux'
+import { BrowserRouter } from "react-router";
+import { ThemeProvider } from "@/components/theme-provider"
 
 const container=document.getElementById('root')
 
@@ -11,9 +13,13 @@ if (container) {
   const root = createRoot(container)
 
   root.render(
+ <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+  <BrowserRouter>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
+  </BrowserRouter>
+ </ThemeProvider>    
   )
 } else {
   throw new Error(

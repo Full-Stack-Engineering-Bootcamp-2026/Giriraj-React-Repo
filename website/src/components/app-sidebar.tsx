@@ -1,24 +1,5 @@
-// import {
-//   Sidebar,
-//   SidebarContent,
-//   SidebarFooter,
-//   SidebarGroup,
-//   SidebarHeader,
-// } from "@/components/ui/sidebar"
 
-// export function AppSidebar() {
-//   return (
-//     <Sidebar>
-//       <SidebarHeader />
-//       <SidebarContent>
-//         <SidebarGroup />
-//         <SidebarGroup />
-//       </SidebarContent>
-//       <SidebarFooter />
-//     </Sidebar>
-//   )
-// }
-
+import { Link } from 'react-router';
 import {
   Sidebar,
   SidebarContent,
@@ -27,7 +8,16 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton
 } from "@/components/ui/sidebar"
+import { ChevronDown } from "lucide-react"; // Import this icon
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible" // Ensure you have this shadcn component
 
 import {
   Home,
@@ -63,75 +53,107 @@ export function AppSidebar() {
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/">
                 <House/>
                 Dashboard
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/forms">
                 <ClipboardList />
                 Forms
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/cards">
                 <CreditCard />
                 Cards
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/charts">
                 <PieChart />
                 Charts
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/buttons">
                 <MousePointer2 />
                 Buttons
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/modals">
                 <Copy />
                 Modals
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/tables">
                 <Table />
                 Tables
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#">
-                <Menu />
-                Pages
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-
+          <Collapsible className="group/collapsible">
+  <SidebarMenuItem>
+    <CollapsibleTrigger asChild>
+      <SidebarMenuButton>
+        <Menu />
+        <span>Pages</span>
+        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+      </SidebarMenuButton>
+    </CollapsibleTrigger>
+    
+    <CollapsibleContent>
+      <SidebarMenuSub> {/* Use SidebarMenuSub for nested items */}
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <Link to="/pages/login">Login</Link>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <Link to="/pages/create-account">Create account</Link>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <Link to="/pages/forgot-password">Forgot password</Link>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <Link to="/pages/Page404">404</Link>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+        <SidebarMenuSubItem>
+          <SidebarMenuSubButton asChild>
+            <Link to="/pages/blank">Blank</Link>
+          </SidebarMenuSubButton>
+        </SidebarMenuSubItem>
+      </SidebarMenuSub>
+    </CollapsibleContent>
+  </SidebarMenuItem>
+</Collapsible>
         </SidebarMenu>
       </SidebarContent>
 
