@@ -54,7 +54,7 @@ const Dashboard = () => {
     const fetchCharacters = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`https://rickandmortyapi.com/api/character`);
+        const res = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
         const data = await res.json();
         setCharacters(data.results);
         setTotalPages(data.info.pages);

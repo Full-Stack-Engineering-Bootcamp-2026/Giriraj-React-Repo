@@ -169,15 +169,17 @@ const options2 = {
           Charts are provided by Chart.js . Note that the default legends are disabled and you should provide a description for your charts in HTML. See source code for examples.
         </div>
          <div className="flex flex-row mt-4 mb-4">
-         <div style={{ width: '400px', height: '400px' }}>
+         <div className="w-1/2" style={{  height: '400px' }}>
             <span>Revenue</span> 
           <Doughnut data={data} options={options} />
           </div>
-          <div style={{ width: '400px', height: '400px' }}>
+          <div className="w-1/2 " style={{  height: '400px' }}>
             <span>Trends</span> 
            <Line data={data1} options={options1} />
           </div>
          </div>
+         
+
          
          
          <div className="mt-4 mb-4" style={{ width: '400px', height: '400px' }}>
