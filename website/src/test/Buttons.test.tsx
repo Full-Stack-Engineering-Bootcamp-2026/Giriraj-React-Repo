@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import Button from '../components/pages/Button'
 
-// ✅ Mock icon (prevents unnecessary dependency rendering issues)
+
 vi.mock('react-icons/ci', () => ({
   CiStar: () => <span data-testid="star-icon" />,
 }))

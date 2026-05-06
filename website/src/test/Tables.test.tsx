@@ -2,12 +2,12 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Dashboard from '../components/pages/Tables'
 
-// ✅ Mock icons
+
 vi.mock('react-icons/ci', () => ({
   CiStar: () => <span data-testid="star-icon" />,
 }))
 
-// ✅ Mock table components
+
 vi.mock('@/components/ui/table', () => ({
   Table: ({ children }: any) => <table>{children}</table>,
   TableBody: ({ children }: any) => <tbody>{children}</tbody>,
@@ -17,7 +17,7 @@ vi.mock('@/components/ui/table', () => ({
   TableHeader: ({ children }: any) => <thead>{children}</thead>,
 }))
 
-// ✅ Mock pagination
+
 vi.mock('@/components/ui/pagination', () => ({
   Pagination: ({ children }: any) => <div>{children}</div>,
   PaginationContent: ({ children }: any) => <div>{children}</div>,
@@ -31,7 +31,7 @@ vi.mock('@/components/ui/pagination', () => ({
   PaginationLink: ({ children }: any) => <span>{children}</span>,
 }))
 
-// ✅ Mock API
+
 const mockData = {
   info: { pages: 5 },
   results: [

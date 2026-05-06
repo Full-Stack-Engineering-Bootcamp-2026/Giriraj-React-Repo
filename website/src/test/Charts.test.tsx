@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Cards from '../components/pages/Cards'
 
-// ✅ Mock chart components (required for Chart.js)
+
 vi.mock('react-chartjs-2', () => ({
   Doughnut: () => <div>Doughnut Chart</div>,
   Line: () => <div>Line Chart</div>,
@@ -10,7 +10,7 @@ vi.mock('react-chartjs-2', () => ({
   Pie: () => <div>Pie Chart</div>,
 }))
 
-// ✅ Mock icon
+
 vi.mock('react-icons/ci', () => ({
   CiStar: () => <span data-testid="star-icon" />,
 }))

@@ -2,19 +2,19 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Modals from '../components/pages/Modals'
 
-// ✅ Mock icon
+
 vi.mock('react-icons/ci', () => ({
   CiStar: () => <span data-testid="star-icon" />,
 }))
 
-// ✅ Mock Button
+
 vi.mock('@/components/ui/button', () => ({
   Button: ({ children, ...props }: any) => (
     <button {...props}>{children}</button>
   ),
 }))
 
-// ✅ Mock Dialog system (simplify behavior)
+
 vi.mock('@/components/ui/dialog', () => ({
   Dialog: ({ children }: any) => <div>{children}</div>,
   DialogTrigger: ({ children }: any) => <div>{children}</div>,

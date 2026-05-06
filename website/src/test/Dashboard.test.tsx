@@ -2,13 +2,13 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { vi } from 'vitest'
 import Dashboard from '../components/pages/Dashboard'
 
-// ✅ Mock charts (important)
+
 vi.mock('react-chartjs-2', () => ({
   Doughnut: () => <div>Doughnut Chart</div>,
   Line: () => <div>Line Chart</div>,
 }))
 
-// ✅ Mock UI components (if needed)
+
 vi.mock('@/components/ui/table', () => ({
   Table: ({ children }: any) => <table>{children}</table>,
   TableBody: ({ children }: any) => <tbody>{children}</tbody>,
@@ -30,7 +30,7 @@ vi.mock('@/components/ui/pagination', () => ({
   ),
 }))
 
-// ✅ Mock fetch
+
 const mockData = {
   info: { pages: 2 },
   results: [

@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Forms from '../components/pages/Forms'
 
-// ✅ Mock react-hook-form complexity (simplify behavior)
+
 vi.mock('react-hook-form', async () => {
   const actual = await vi.importActual<any>('react-hook-form')
   return {
@@ -17,12 +17,12 @@ vi.mock('react-hook-form', async () => {
   }
 })
 
-// ✅ Mock Zod resolver (skip validation complexity)
+
 vi.mock('@hookform/resolvers/zod', () => ({
   zodResolver: () => () => ({}),
 }))
 
-// ✅ Mock UI components
+
 vi.mock('@/components/ui/input', () => ({
   Input: (props: any) => <input {...props} />,
 }))

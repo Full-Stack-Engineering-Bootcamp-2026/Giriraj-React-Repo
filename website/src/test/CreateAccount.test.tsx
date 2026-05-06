@@ -2,13 +2,13 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import CreateAccount from '../components/pages/CreateAccount'
 
-// ✅ Mock router
+
 const mockNavigate = vi.fn()
 vi.mock('react-router', () => ({
   useNavigate: () => mockNavigate,
 }))
 
-// ✅ Mock UI components
+
 vi.mock('@/components/ui/button', () => ({
   Button: ({ children, ...props }: any) => (
     <button {...props}>{children}</button>

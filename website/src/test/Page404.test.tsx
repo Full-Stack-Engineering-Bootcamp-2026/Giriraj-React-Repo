@@ -2,13 +2,13 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Page404 from '../components/pages/Page404'
 
-// ✅ Mock navigation
+
 const mockNavigate = vi.fn()
 vi.mock('react-router', () => ({
   useNavigate: () => mockNavigate,
 }))
 
-// ✅ Mock UI button
+
 vi.mock('@/components/ui/button', () => ({
   Button: ({ children, onClick, ...props }: any) => (
     <button onClick={onClick} {...props}>
@@ -17,7 +17,7 @@ vi.mock('@/components/ui/button', () => ({
   ),
 }))
 
-// ✅ Mock lucide icons
+
 vi.mock('lucide-react', () => ({
   OctagonAlert: () => <span data-testid="alert-icon" />,
   MoveLeft: () => <span data-testid="back-icon" />,

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import Login from '../components/pages/Login'
 
-// ✅ Mock UI components
+
 vi.mock('@/components/ui/button', () => ({
   Button: ({ children, ...props }: any) => (
     <button {...props}>{children}</button>
@@ -23,7 +23,7 @@ vi.mock('@/components/ui/separator', () => ({
   Separator: () => <hr />,
 }))
 
-// ✅ Mock icons
+
 vi.mock('react-icons/fa', () => ({
   FaGithub: () => <span data-testid="github-icon" />,
   FaTwitter: () => <span data-testid="twitter-icon" />,
